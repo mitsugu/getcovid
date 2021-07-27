@@ -5,6 +5,7 @@ import (
   "net/http"
   "fmt"
   "io/ioutil"
+  "github.com/mattn/go-jsonpointer"
 )
 
 func main() {
@@ -17,88 +18,28 @@ func main() {
   json.Unmarshal(byteArray, &positives)
 
   // 年月日
-  d := positives.(map[string]interface{})["last_update"].(string);
-
-  layer := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})
+  d, _ := jsonpointer.Get(positives, "/last_update")
 
   // 軽症・中等症
-  kei := layer[0].(map[string]interface {})["children"].([]interface {})[0].(map[string]interface{})["value"]
+  kei, _ := jsonpointer.Get(positives,
+                            "/children/0/children/0/children/0/value")
   // 重症
-  jyuu := layer[0].(map[string]interface {})["children"].([]interface {})[1].(map[string]interface{})["value"]
+  jyuu, _ := jsonpointer.Get(positives,
+                              "/children/0/children/0/children/1/value")
   // 宿泊療養
-  syuku := layer[1].(map[string]interface{})["value"]
+  syuku, _ := jsonpointer.Get(positives, "/children/0/children/1/value")
   // 入院・宿泊療養調整等
-  cyou := layer[2].(map[string]interface {})["value"]
+  cyou, _ := jsonpointer.Get(positives, "/children/0/children/2/value")
   // 自宅療養
-  home := layer[3].(map[string]interface {})["value"]
+  home, _ := jsonpointer.Get(positives, "/children/0/children/3/value")
   // その他医療機関福祉施設等
-  fukushi := layer[4].(map[string]interface {})["value"]
+  fukushi, _ := jsonpointer.Get(positives, "/children/0/children/4/value")
   // 死亡
-  shibou := layer[5].(map[string]interface {})["value"]
+  shibou, _ := jsonpointer.Get(positives, "/children/0/children/5/value")
   // 退院
-  taiin := layer[6].(map[string]interface {})["value"]
+  taiin, _ := jsonpointer.Get(positives, "/children/0/children/6/value")
 
   fmt.Printf("%v, %v, %v, %v, %v, %v, %v,, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
 
 }
-
-
-/*
-map[string]interface {}{
-  "attr":"検査実施人数",
-  "children":[]interface {}{
-    map[string]interface {}{
-      "attr":"陽性患者数",
-      "children":[]interface {}{
-        map[string]interface {}{
-          "attr":"入院中",
-          "children":[]interface {}{
-            map[string]interface {}{
-              "attr":"軽症・中等症",
-              "value":276
-            },
-            map[string]interface {}{
-              "attr":"重症",
-              "value":15
-            }
-          },
-          "value":291
-        },
-        map[string]interface {}{
-          "attr":"宿泊療養",
-          "value":327
-        },
-        map[string]interface {}{
-          "attr":"入院・宿泊療養調整等",
-          "children":[]interface {}{
-            map[string]interface {}{
-              "attr":"入院調整",
-              "value":40
-            }
-          },
-          "value":64
-        },
-        map[string]interface {}{
-          "attr":"自宅療養",
-          "value":204
-        },
-        map[string]interface {}{
-          "attr":"その他医療機関福祉施設等",
-          "value":2
-        },
-        map[string]interface {}{
-          "attr":"死亡",
-          "value":1315
-        },
-        map[string]interface {}{
-          "attr":"退院", "value":40322
-        }
-      },
-      "value":42525
-    }
-  },
-  "last_update":"2021-07-26T00:00:00+09:00",
-  "value":544463
-}
-*/
 
