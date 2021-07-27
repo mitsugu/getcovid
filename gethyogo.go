@@ -34,7 +34,7 @@ func main() {
   // 退院
   taiin := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[6].(map[string]interface {})["value"]
 
-  fmt.Printf("%v, %v, %v, %v, %v, %v, %v, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
+  fmt.Printf("%v, %v, %v, %v, %v, %v, %v,, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
 
 }
 
