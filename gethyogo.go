@@ -15,24 +15,28 @@ func main() {
 
   var positives interface{}
   json.Unmarshal(byteArray, &positives)
+
   // 年月日
   d := positives.(map[string]interface{})["last_update"].(string);
+
+  layer := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})
+
   // 軽症・中等症
-  kei := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[0].(map[string]interface{})["value"]
+  kei := layer[0].(map[string]interface {})["children"].([]interface {})[0].(map[string]interface{})["value"]
   // 重症
-  jyuu := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[1].(map[string]interface{})["value"]
+  jyuu := layer[0].(map[string]interface {})["children"].([]interface {})[1].(map[string]interface{})["value"]
   // 宿泊療養
-  syuku := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[1].(map[string]interface{})["value"]
+  syuku := layer[1].(map[string]interface{})["value"]
   // 入院・宿泊療養調整等
-  cyou := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[2].(map[string]interface {})["value"]
+  cyou := layer[2].(map[string]interface {})["value"]
   // 自宅療養
-  home := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[3].(map[string]interface {})["value"]
+  home := layer[3].(map[string]interface {})["value"]
   // その他医療機関福祉施設等
-  fukushi := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[4].(map[string]interface {})["value"]
+  fukushi := layer[4].(map[string]interface {})["value"]
   // 死亡
-  shibou := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[5].(map[string]interface {})["value"]
+  shibou := layer[5].(map[string]interface {})["value"]
   // 退院
-  taiin := positives.(map[string]interface{})["children"].([]interface {})[0].(map[string]interface {})["children"].([]interface {})[6].(map[string]interface {})["value"]
+  taiin := layer[6].(map[string]interface {})["value"]
 
   fmt.Printf("%v, %v, %v, %v, %v, %v, %v,, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
 
