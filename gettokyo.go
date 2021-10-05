@@ -41,6 +41,6 @@ func main() {
   cyousei, _ := jsonpointer.Get(positives,
               "/main_summary/children/0/children/5/value")
 
-  fmt.Printf("%v, %v, %v, %v, %v, %v,, %v, %v\n", d, cyousei, jitaku, syukuhaku, keisyou, jyuusyou, shibou, taiin)
+  fmt.Printf("%v, %v, %v, %v, %v, %v,,, %v, %v\n", d, cyousei, jitaku, syukuhaku, keisyou, jyuusyou, shibou, taiin)
 }
 

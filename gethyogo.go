@@ -39,7 +39,7 @@ func main() {
   // 退院
   taiin, _ := jsonpointer.Get(positives, "/children/0/children/6/value")
 
-  fmt.Printf("%v, %v, %v, %v, %v, %v, %v,, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
+  fmt.Printf("%v, %v, %v, %v, %v, %v, %v,,, %v, %v\n", d, syuku, kei, cyou, home, fukushi, jyuu, shibou, taiin)
 
 }
 
