@@ -43,7 +43,7 @@ func main() {
   tmp, _ = jsonpointer.Get(positives,
               "/main_summary/children/0/children/6/value")
   fumei += tmp.(float64)
-  //     府外健康観察
+  //     大規模医療療養センター
   tmp, _ = jsonpointer.Get(positives,
               "/main_summary/children/0/children/7/value")
   fumei += tmp.(float64)
