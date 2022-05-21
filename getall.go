@@ -73,11 +73,11 @@ func getDeathAccumulation() (string) {
 }
 
 func main() {
-  d, irc, released := getIrc()  // 要入院者数
+  d, irc, released := getIrc()  // 日付, 要入院者数, 退院数
   srv := getSrv()               // 重症者数
   death := getDeath()           // 死亡者数
   acc := getDeathAccumulation() // 死亡者数累計
 
-  fmt.Printf("%v, %v, %v, %v, %v, %v\n", d, irc, released, srv, death, acc )
+  fmt.Printf("%v, %v, %v, %v, %v, %v\n", d, irc, srv, death, acc, released )
 }
 
